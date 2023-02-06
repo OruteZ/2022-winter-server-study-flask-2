@@ -46,7 +46,7 @@ class UserManagement(Resource):
         elif result[1] != password:
             database.close()
             return {
-                       "message": "비밀번호가 일치하지 않음"
+                       "message": "아이디나 비밀번호가 일치하지 않음"
                    }, 400
 
         else:
