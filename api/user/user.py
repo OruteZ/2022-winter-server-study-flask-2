@@ -32,7 +32,7 @@ class UserManagement(Resource):
         cursor = database.cursor()
 
         id = request.args.get("id")
-        password = request.args.get("password")
+        password = request.args.get("pw")
 
         cnt = cursor.execute(f"SELECT * FROM user WHERE id = '{id}'")
         result = cursor.fetchone()
