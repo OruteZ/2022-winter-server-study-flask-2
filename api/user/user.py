@@ -40,13 +40,13 @@ class UserManagement(Resource):
         if cnt == 0:
             database.close()
             return {
-                       "message": "해당 유저가 존재하지 않음"
+                       "message": "User Not Found"
                    }, 400
 
         elif result[1] != password:
             database.close()
             return {
-                       "message": "아이디나 비밀번호가 일치하지 않음"
+                       "message": "Password incorrect"
                    }, 400
 
         else:
@@ -70,7 +70,7 @@ class UserManagement(Resource):
             database.close()
             return {
                        "is_success": False,
-                       "message": "이미 있는 유저"
+                       "message": "User already exist"
                    }, 400
 
         cursor.execute(f"INSERT INTO user VALUES('{id}', '{password}', '{nickname}');")
@@ -78,7 +78,7 @@ class UserManagement(Resource):
         database.close()
         return {
                    "is_success": True,
-                   "message": "유저 생성 성공"
+                   "message": "creating user success"
                }, 200
 
     def put(self):
@@ -96,13 +96,13 @@ class UserManagement(Resource):
             database.close()
             return {
                        "is_success": False,
-                       "message": "아이디나 비밀번호 불일치"
+                       "message": "ID or PW incorrect"
                    }, 400
         if result[2] == nickname:
             database.close()
             return {
                        "is_success": False,
-                       "message": "현재 닉네임과 같음"
+                       "message": "Nickname is not changed"
                    }, 400
 
         cursor.execute(f"UPDATE user SET nickname = '{nickname}' WHERE id = '{id}' and pw = '{password}';")
@@ -110,7 +110,7 @@ class UserManagement(Resource):
         database.close()
         return {
                    "is_success": True,
-                   "message": "유저 닉네임 변경 성공"
+                   "message": "Successful change"
                }, 200
 
     def delete(self):
@@ -126,7 +126,7 @@ class UserManagement(Resource):
             database.close()
             return {
                        "is_success": False,
-                       "message": "아이디나 비밀번호 불일치"
+                       "message": "ID or PW incorrect"
                    }, 400
 
         cursor.execute(f"DELETE FROM user WHERE id = '{id}' and pw = '{password}';")
@@ -134,5 +134,5 @@ class UserManagement(Resource):
         database.close()
         return {
                    "is_success": True,
-                   "message": "유저 삭제 성공"
+                   "message": "Deleted User successful"
                }, 200
